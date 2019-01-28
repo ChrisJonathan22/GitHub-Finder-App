@@ -16,22 +16,24 @@ $(document).ready(function(){
                                 return "<div class='panel panel-default'>" + 
                                         "<div class='panel-heading'>" +
                                         `<h3 class='panel-title'>${user.name}</h3></div>` +
-                                        "<div class='panel-body'>Panel content</div></div>"
+                                        `<img src=${user.avatar_url}>` +
+                                        "<p id='bio-title'><span>Bio</span></p>" +
+                                        `<p id="bio-content">${user.bio}</p>` +
+                                        `<p><span>Public repos:</span> ${user.public_repos}</p>` +
+                                        "<div class='panel-body'>Panel content</div></div>" 
                         }
                         );
+                        console.log(user);
                 });
         });
 
         $('#searchUser').on('blur', function(e){
-
                 if($('#searchUser').val() == "" ){
                         console.log("The search input is empty.");
                         $("#profile").html("");
                 }
-
                 else {
                         console.log("The search input is not empty.");
                 }
-
         });
 });

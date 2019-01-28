@@ -1,0 +1,28 @@
+/* User content styles */
+.panel {
+    text-align: center;
+}
+
+.panel-title {
+    text-align: center;
+}
+
+.panel #bio-title {
+    padding-top: 10px;
+    font-size: 30px;
+}
+
+.panel #bio-content {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.panel span {
+    color: orange;
+}
+
+.panel img {
+    border-radius: 20px;
+    border: 3px orange solid;
+    padding: 20px;
+}
