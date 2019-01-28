@@ -10,20 +10,15 @@ $(document).ready(function(){
                                 client_id: 'd4e5565df611a4fc8bb2' ,
                                 client_secret: '398f82509532a5bfc666f64dcfc522656cde13e4'
                         }
-                }).done(function(user){
-                        $('#profile').html(''
-
-                        <div class="panel panel-default">
-                                <div class="panel-heading">
-                                        <h3 class="panel-title">${user.name}</h3>
-                                </div>
-                                <div class="panel-body">
-                                Panel content
-                                </div>
-                        </div>
-
-
-                        '');
+                })
+                .done((user) => {
+                        $("#profile").html(() => {
+                                return "<div class='panel panel-default'>" + 
+                                        "<div class='panel-heading'>" +
+                                        `<h3 class='panel-title'>${user.name}</h3></div>` +
+                                        "<div class='panel-body'>Panel content</div></div>"
+                        }
+                        );
                 });
         });
 });
