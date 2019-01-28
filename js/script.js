@@ -21,4 +21,17 @@ $(document).ready(function(){
                         );
                 });
         });
+
+        $('#searchUser').on('blur', function(e){
+
+                if($('#searchUser').val() == "" ){
+                        console.log("The search input is empty.");
+                        $("#profile").html("");
+                }
+
+                else {
+                        console.log("The search input is not empty.");
+                }
+
+        });
 });
