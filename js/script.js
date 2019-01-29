@@ -19,8 +19,7 @@ $(document).ready(function(){
                                         `<img src=${user.avatar_url}>` +
                                         "<p id='bio-title'><span>Bio</span></p>" +
                                         `<p id="bio-content">${user.bio}</p>` +
-                                        `<p><span>Public repos:</span> ${user.public_repos}</p>` +
-                                        "<div class='panel-body'>Panel content</div></div>" 
+                                        `<p><span>Public repos:</span> ${user.public_repos}</p>`
                         }
                         );
                         console.log(user);
