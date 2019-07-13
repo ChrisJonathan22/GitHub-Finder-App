@@ -5,16 +5,27 @@
 
 .panel-title {
     text-align: center;
+    font-size: 3em;
 }
 
-.panel #bio-title {
+#bio-title {
     padding-top: 10px;
-    font-size: 30px;
+    font-size: 3em;
 }
 
-.panel #bio-content {
+#bio-content {
     width: 70%;
     margin: 0 auto;
+    font-size: 1.1em;
+}
+
+#location {
+    padding-top: 25px;
+    font-size: 1.5em !important;
+}
+
+#website {
+    font-size: 1.5em;
 }
 
 .panel span {
