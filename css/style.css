@@ -26,10 +26,11 @@
 
 #website {
     font-size: 1.5em;
+    display: inline;
 }
 
-.panel span {
-    color: orange;
+#website-link {
+    font-size: 1.5em;
 }
 
 .panel img {
@@ -38,6 +39,14 @@
     padding: 20px;
 }
 
+#repos {
+    font-size: 1.5em;
+}
+
+#repos-count {
+    text-decoration-line: underline;
+    color: black;
+}
 
 /* Media Queries */
 
