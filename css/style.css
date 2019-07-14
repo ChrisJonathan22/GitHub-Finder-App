@@ -54,5 +54,10 @@
 @media screen and (max-width: 480px) {
     .container {
         justify-content: center !important;
+        overflow: hidden;
+    }
+
+    .panel img {
+        width: 100%
     }
 }
