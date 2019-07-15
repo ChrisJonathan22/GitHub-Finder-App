@@ -44,7 +44,6 @@ $(document).ready(function(){
                                         `<p id="repos"><span style="color: ${randomColor};">Public repos</span>: <span id="repos-count" style="text-decoration-color: ${randomColor};">${user.public_repos ? user.public_repos : 'Public repos empty'}</span></p>`
                         }
                         );
-                        console.log(user);
                 });
         });
 

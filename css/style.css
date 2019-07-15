@@ -57,6 +57,14 @@
         overflow: hidden;
     }
 
+    #bio-content {
+        width: 90% !important;
+    }
+
+    #website-link {
+        font-size: 1.4em !important;
+    }
+
     .panel img {
         width: 100%
     }
