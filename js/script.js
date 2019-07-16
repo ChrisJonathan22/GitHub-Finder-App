@@ -9,6 +9,8 @@ let listOfColors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
 '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
 '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
 
+let warningColor = 'red';
+
 function getRandomNumber (maxNumber) {
         let randomNumber = Math.floor(Math.random() * maxNumber.length) - 1;
         return randomNumber;
@@ -32,11 +34,12 @@ $(document).ready(function(){
                         }
                 })
                 .done((user) => {
+                        console.log(user);
                         $("#profile").html(() => {
                                 return "<div class='panel panel-default'>" + 
                                         "<div class='panel-heading'>" +
                                         `<h3 class='panel-title'>${user.name ? user.name : 'Username not found...'}</h3></div>` +
-                                        `<img src=${user.avatar_url} style="border-color: ${randomColor};">` +
+                                        `<img class="user-avatar" src=${user.avatar_url} style="border-color: ${randomColor};">` +
                                         `<p id='bio-title' style="color: ${randomColor};"><span>Bio</span></p>` +
                                         `<p id="bio-content">${user.bio ? user.bio : 'No info available'}</p>` +
                                         `<p id="location"><span style="color: ${randomColor};">Location</span>: ${user.location ? user.location : 'Location unknown'}</p>` +
@@ -44,13 +47,27 @@ $(document).ready(function(){
                                         `<p id="repos"><span style="color: ${randomColor};">Public repos</span>: <span id="repos-count" style="text-decoration-color: ${randomColor};">${user.public_repos ? user.public_repos : 'Public repos empty'}</span></p>`
                         }
                         );
+                })
+                .fail(() => {
+                        $('.user-avatar').attr('src', 'https://media.giphy.com/media/3o6gaYez5IKFNoLbI4/giphy.gif');
+                        $('#repos-count').text('0');
+                        $("#profile").html(() => {
+                                return "<div class='panel panel-default'>" + 
+                                        "<div class='panel-heading'>" +
+                                        `<h3 class='panel-title'>Username not found...</h3></div>` +
+                                        `<img class="user-avatar" src='https://media.giphy.com/media/3o6gaYez5IKFNoLbI4/giphy.gif' style="border-color: ${warningColor};">` +
+                                        `<p id='bio-title' style="color: ${warningColor};"><span>Bio</span></p>` +
+                                        `<p id="bio-content">No info available</p>` +
+                                        `<p id="location"><span style="color: ${warningColor};">Location</span>: Location unknown</p>` +
+                                        `<p id="website"><span style="color: ${warningColor};">Website</span>:</p> <a href="www.nouser.com" id="website-link" target="_blank">www.nouser.com</a>` +
+                                        `<p id="repos"><span style="color: ${warningColor};">Public repos</span>: <span id="repos-count" style="text-decoration-color: ${warningColor};">0</span></p>`
+                        }
+                        );
                 });
         });
 
         $('#searchUser').on('blur', function(e){
-                if($('#searchUser').val() == "" ){
-                        console.log("The search input is empty.");
-                        alert("The search input is empty.");
+                if($('#searchUser').val() === "" ){
                         $("#profile").html("");
                 }
         });
