@@ -20,6 +20,23 @@ function getRandomColor (colors, randomNumber) {
         return colors[randomNumber];
 }
 
+
+async function getGif (url, api, tag) {
+        let fetchGif = await fetch(`${url}?api_key=${api}&tag=${tag}`, {
+                options: {
+                        mode: 'no-cors'
+               }
+        });
+        let json = await fetchGif.json();
+        let { embed_url: gif } = json.data;
+        console.log('here is the gif', gif);
+        return gif;
+}
+
+// getGif('https://api.giphy.com/v1/gifs/random');
+
+
+
 $(document).ready(function(){
         $('#searchUser').on('keyup', e => {
                 let username = e.target.value;
@@ -49,7 +66,8 @@ $(document).ready(function(){
                         );
                 })
                 .fail(() => {
-                        $('.user-avatar').attr('src', 'https://media.giphy.com/media/3o6gaYez5IKFNoLbI4/giphy.gif');
+                        let gif = getGif('https://api.giphy.com/v1/gifs/random', '2PXC5DpzvByeOSd3cfYLduel1xK5CLHO', 'whoareyou?');
+                        $('.user-avatar').attr('src', gif);
                         $('#repos-count').text('0');
                         $("#profile").html(() => {
                                 return "<div class='panel panel-default'>" + 
@@ -72,3 +90,6 @@ $(document).ready(function(){
                 }
         });
 });
+
+
+// Use the Giphy api to choose a random who are you gif whenever a user isn't foun.
