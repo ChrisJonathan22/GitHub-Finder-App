@@ -29,15 +29,11 @@ async function getGif (url, api, tag) {
         });
         let json = await fetchGif.json();
         let { embed_url: gif } = json.data;
-        console.log('here is the gif', gif);
         return gif;
 }
 
-// getGif('https://api.giphy.com/v1/gifs/random');
 
-
-
-$(document).ready(function(){
+// $(document).ready(function(){
         $('#searchUser').on('keyup', e => {
                 let username = e.target.value;
                 let randomColor = getRandomColor(listOfColors, getRandomNumber(listOfColors));
@@ -67,13 +63,13 @@ $(document).ready(function(){
                 })
                 .fail(() => {
                         let gif = getGif('https://api.giphy.com/v1/gifs/random', '2PXC5DpzvByeOSd3cfYLduel1xK5CLHO', 'whoareyou?');
-                        $('.user-avatar').attr('src', gif);
+                        // console.log(typeof gif);
                         $('#repos-count').text('0');
                         $("#profile").html(() => {
                                 return "<div class='panel panel-default'>" + 
                                         "<div class='panel-heading'>" +
                                         `<h3 class='panel-title'>Username not found...</h3></div>` +
-                                        `<img class="user-avatar" src='https://media.giphy.com/media/3o6gaYez5IKFNoLbI4/giphy.gif' style="border-color: ${warningColor};">` +
+                                        `<img class="user-avatar" src=${gif} style="border-color: ${warningColor};">` +
                                         `<p id='bio-title' style="color: ${warningColor};"><span>Bio</span></p>` +
                                         `<p id="bio-content">No info available</p>` +
                                         `<p id="location"><span style="color: ${warningColor};">Location</span>: Location unknown</p>` +
@@ -81,6 +77,7 @@ $(document).ready(function(){
                                         `<p id="repos"><span style="color: ${warningColor};">Public repos</span>: <span id="repos-count" style="text-decoration-color: ${warningColor};">0</span></p>`
                         }
                         );
+                        $('.user-avatar').attr('src', gif);
                 });
         });
 
@@ -89,7 +86,7 @@ $(document).ready(function(){
                         $("#profile").html("");
                 }
         });
-});
+// });
 
 
 // Use the Giphy api to choose a random who are you gif whenever a user isn't foun.
