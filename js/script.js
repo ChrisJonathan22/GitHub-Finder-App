@@ -28,12 +28,12 @@ async function getGif (url, api, tag) {
                }
         });
         let json = await fetchGif.json();
-        let { embed_url: gif } = json.data;
-        return gif;
+        // console.log(json);
+        return json;
 }
 
 
-// $(document).ready(function(){
+$(document).ready(function(){
         $('#searchUser').on('keyup', e => {
                 let username = e.target.value;
                 let randomColor = getRandomColor(listOfColors, getRandomNumber(listOfColors));
@@ -47,7 +47,7 @@ async function getGif (url, api, tag) {
                         }
                 })
                 .done((user) => {
-                        console.log(user);
+                        // console.log(user);
                         $("#profile").html(() => {
                                 return "<div class='panel panel-default'>" + 
                                         "<div class='panel-heading'>" +
@@ -63,13 +63,16 @@ async function getGif (url, api, tag) {
                 })
                 .fail(() => {
                         let gif = getGif('https://api.giphy.com/v1/gifs/random', '2PXC5DpzvByeOSd3cfYLduel1xK5CLHO', 'whoareyou?');
-                        // console.log(typeof gif);
+                        let gifs;                        
+                        gif.then(data => {
+                                gifs = data.data;
+                        });
                         $('#repos-count').text('0');
                         $("#profile").html(() => {
                                 return "<div class='panel panel-default'>" + 
                                         "<div class='panel-heading'>" +
                                         `<h3 class='panel-title'>Username not found...</h3></div>` +
-                                        `<img class="user-avatar" src=${gif} style="border-color: ${warningColor};">` +
+                                        `<img class="user-avatar" src=${gifs} style="border-color: ${warningColor};">` +
                                         `<p id='bio-title' style="color: ${warningColor};"><span>Bio</span></p>` +
                                         `<p id="bio-content">No info available</p>` +
                                         `<p id="location"><span style="color: ${warningColor};">Location</span>: Location unknown</p>` +
@@ -77,7 +80,7 @@ async function getGif (url, api, tag) {
                                         `<p id="repos"><span style="color: ${warningColor};">Public repos</span>: <span id="repos-count" style="text-decoration-color: ${warningColor};">0</span></p>`
                         }
                         );
-                        $('.user-avatar').attr('src', gif);
+                        $('.user-avatar').attr('src', gifs);
                 });
         });
 
@@ -86,7 +89,4 @@ async function getGif (url, api, tag) {
                         $("#profile").html("");
                 }
         });
-// });
-
-
-// Use the Giphy api to choose a random who are you gif whenever a user isn't foun.
+});
