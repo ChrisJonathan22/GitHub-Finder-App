@@ -20,6 +20,7 @@ function getRandomColor (colors, randomNumber) {
         return colors[randomNumber];
 }
 
+let gifData;
 
 async function getGif (url, api, tag) {
         let fetchGif = await fetch(`${url}?api_key=${api}&tag=${tag}`, {
@@ -28,8 +29,7 @@ async function getGif (url, api, tag) {
                }
         });
         let json = await fetchGif.json();
-        // console.log(json);
-        return json;
+        gifData = json;
 }
 
 
@@ -62,17 +62,14 @@ $(document).ready(function(){
                         );
                 })
                 .fail(() => {
-                        let gif = getGif('https://api.giphy.com/v1/gifs/random', '2PXC5DpzvByeOSd3cfYLduel1xK5CLHO', 'whoareyou?');
-                        let gifs;                        
-                        gif.then(data => {
-                                gifs = data.data;
-                        });
+                        getGif('https://api.giphy.com/v1/gifs/random', '2PXC5DpzvByeOSd3cfYLduel1xK5CLHO', 'justiceleague');
+                        let gifUrl = gifData.data.image_url;
                         $('#repos-count').text('0');
                         $("#profile").html(() => {
                                 return "<div class='panel panel-default'>" + 
                                         "<div class='panel-heading'>" +
                                         `<h3 class='panel-title'>Username not found...</h3></div>` +
-                                        `<img class="user-avatar" src=${gifs} style="border-color: ${warningColor};">` +
+                                        `<img class="user-avatar" src=${gifUrl} style="border-color: ${warningColor};">` +
                                         `<p id='bio-title' style="color: ${warningColor};"><span>Bio</span></p>` +
                                         `<p id="bio-content">No info available</p>` +
                                         `<p id="location"><span style="color: ${warningColor};">Location</span>: Location unknown</p>` +
@@ -80,7 +77,6 @@ $(document).ready(function(){
                                         `<p id="repos"><span style="color: ${warningColor};">Public repos</span>: <span id="repos-count" style="text-decoration-color: ${warningColor};">0</span></p>`
                         }
                         );
-                        $('.user-avatar').attr('src', gifs);
                 });
         });
 
